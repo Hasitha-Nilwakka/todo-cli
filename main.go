@@ -14,9 +14,10 @@ func main() {
 		return
 	}
 
+	//main functional argument of the user
 	cmd := args[1]
 	switch cmd {
-	case "add":
+	case "add": //adding a new item
 		if len(args) < 3 {
 			fmt.Println("Usage: ./todo add \"task description\"")
 			return
@@ -25,12 +26,13 @@ func main() {
 		if err := AddTask(title); err != nil {
 			fmt.Println("Error: ", err)
 		}
-	case "list":
+		fmt.Println("Task added successfully!")
+	case "list": //display a list of records
 		err := ListTasks()
 		if err != nil {
 			fmt.Println("Error: ", err)
 		}
-	case "complete":
+	case "complete": //mark an item as complete
 		if len(args) < 3 {
 			fmt.Println("Usage: ./todo add \"task number\"")
 			return
@@ -43,7 +45,8 @@ func main() {
 		if err := CompleteTask(taskId); err != nil {
 			fmt.Println("Error: ", err)
 		}
-	case "delete":
+		fmt.Println("Task marked as completed!")
+	case "delete": //delete a task
 		if len(args) < 3 {
 			fmt.Println("Usage: ./todo delete \"task number\"")
 			return
@@ -56,7 +59,9 @@ func main() {
 		if err := DeleteTask(taskId); err != nil {
 			fmt.Println("Error: ", err)
 		}
+		fmt.Println("Task deleted successfully!")
 	default:
+		//if user argument is incorrect, usage is displayed
 		fmt.Println("Unknown command:", cmd)
 		fmt.Println("Usage: todo [add|list|complete|delete]")
 	}

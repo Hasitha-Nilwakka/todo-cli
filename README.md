@@ -1,7 +1,7 @@
 # todo-cli
 
 A simple command-line tool to manage your tasks.
-The tool stores the tasks in JSON format in the project root.
+The tool stores the tasks in JSON based loacl database
 
 ## Usage
 

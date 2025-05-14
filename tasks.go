@@ -6,12 +6,15 @@ import (
 	"os"
 )
 
+// The main data structre for the application
 type Task struct {
 	ID        int    `json:"id"`
 	Title     string `json:"title"`
 	Completed bool   `json:"completed"`
 }
 
+// function loads the current tasks in the JSON file.
+// if JSON is not found a nil strcut is returned
 func Loadtasks() ([]Task, error) {
 	file, err := os.ReadFile("tasks.json")
 	if err != nil {
@@ -22,6 +25,8 @@ func Loadtasks() ([]Task, error) {
 	return tasks, err
 }
 
+// addtask function prepares data to be saved to the JSON
+// generate the task id by incrementing the last task id
 func AddTask(title string) error {
 	tasks, err := Loadtasks()
 	if err != nil {
@@ -35,6 +40,7 @@ func AddTask(title string) error {
 	return Savetask(tasks)
 }
 
+// function takes in a []Task and save the data into JSON
 func Savetask(tasks []Task) error {
 	data, err := json.MarshalIndent(tasks, "", " ")
 	if err != nil {
@@ -43,6 +49,8 @@ func Savetask(tasks []Task) error {
 	return os.WriteFile("tasks.json", data, 0644)
 }
 
+// the function markes a user defined tasks as completed.
+// the function calls SaveTask function to update the tasks to JSON
 func CompleteTask(taskId int) error {
 	tasks, err := Loadtasks()
 	if err != nil {
@@ -59,6 +67,9 @@ func CompleteTask(taskId int) error {
 	return fmt.Errorf("task ID %d not found", taskId)
 }
 
+// calls load tasks to retrive the current list of tasks
+// Status is marked as compled has "✅" and incomplete has "❌"
+// formatted records are printed to console line by line
 func ListTasks() error {
 	tasks, err := Loadtasks()
 	if err != nil {
@@ -76,6 +87,8 @@ func ListTasks() error {
 	return nil
 }
 
+// This function deletes a user define task id from the JSON records
+// Other tasks are then recorded to a new struct and calls SaveTask function
 func DeleteTask(taskId int) error {
 	tasks, err := Loadtasks()
 	if err != nil {
