@@ -6,6 +6,7 @@ A simple command-line tool to manage your tasks.
 
 ```sh
 ./todo [add|list|complete|delete] [arguments]
+````
 
 Commands
 add "task description"
