@@ -40,3 +40,10 @@ Example:
 ```sh
 ./todo delete 1
 ```
+
+# To launch this application
+
+```sh
+git clone https://github.com/Hasitha-Nilwakka/todo-cli.git
+cd todo-cli
+```
